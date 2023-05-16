@@ -2,17 +2,16 @@
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  border: 1px solid red;
   max-width: 1024px;
 }
 .header {
-  margin: 2rem 0;
+  margin: 3rem 0;
 }
 .header-wrap {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
-  h3,
+  .title,
   .btn-wrap {
     text-align: right;
   }
