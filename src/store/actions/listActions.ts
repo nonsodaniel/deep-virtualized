@@ -14,24 +14,39 @@ import {
   CLEAR_EDIT_LIST,
   IListData,
 } from "./types";
+import { Get } from "../../config/apiServices";
 
 interface IPayload {
   lists?: IListData;
   errorMsg?: string;
 }
+
+const url = `https://front-end-task-dot-fpls-dev.uc.r.appspot.com/api/v1/public/task_templates`;
+
 export const getLists = () => {
-  return (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch) => {
     try {
       dispatch({ type: START_FETCH_LIST });
-      const response = JSON.parse(localStorage.getItem("lists")!);
-
+      const localList = JSON.parse(localStorage.getItem("lists")!);
       let payload: IPayload = {};
-      if (response.length) {
-        payload.lists = response;
-        dispatch({ type: SET_LIST_DATA, payload });
+      if (localList) {
+        payload.lists = localList;
+        return dispatch({ type: SET_LIST_DATA, payload });
       } else {
-        payload.errorMsg = "failed to fetch data";
-        dispatch({ type: SET_LIST_DATA, payload });
+        const response = await Get(url);
+        const { status } = response;
+
+        if (status === 200) {
+          payload.lists = response.data;
+          localStorage.setItem(
+            "lists",
+            JSON.stringify(response.data.splice(0, 200))
+          );
+          dispatch({ type: SET_LIST_DATA, payload });
+        } else {
+          payload.errorMsg = "failed to fetch data";
+          dispatch({ type: SET_LIST_DATA, payload });
+        }
       }
     } catch (error) {
       if (error instanceof Error) {
