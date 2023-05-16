@@ -14,7 +14,7 @@ export type ListCategory = "Education" | "E-commerce" | "Health";
 
 export interface IListData {
   id?: string;
-  category: ListCategory;
+  category: ListCategory[];
   description: string;
   name: string;
   link: string;

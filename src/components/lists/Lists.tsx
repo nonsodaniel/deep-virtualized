@@ -4,24 +4,57 @@ import * as actions from "../../store/actions/listActions";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import { IListData } from "../../store/actions/types";
+import loadingImg from "../assets/loading.gif";
+import networkImg from "../assets/no-connection.png";
 interface IListsProps {
-  data: IListData;
+  data: IListData[];
+  loading: boolean;
+  errorMessage: string;
   getLists: () => void;
 }
 
-const Lists = ({ data, getLists }: IListsProps) => {
-  const arr = Array.from(Array(100));
-
+const Lists = ({ data, getLists, loading, errorMessage }: IListsProps) => {
+  const isDataLoaded = data && data.length > 0;
   useEffect(() => {
     getLists();
   }, [getLists]);
 
   return (
     <div className="lists-wrap" data-testid="lists-wrap">
-      <div className="list card">
-        {arr.map((o) => (
-          <List key={Math.random()} />
-        ))}
+      <div className={isDataLoaded ? "lists card" : "no-list"}>
+        {errorMessage === "Network Error" ? (
+          <div className="text-center network-error">
+            <img src={networkImg} alt="Loading animation" height="150" />
+            <p>Unable to connect to the Internet</p>
+            <button
+              className="btn-network__error pointer"
+              onClick={() => window.location.reload()}
+            >
+              Refresh
+            </button>
+          </div>
+        ) : !loading ? (
+          isDataLoaded ? (
+            data.map((list) => {
+              return (
+                <List
+                  key={Math.floor(Math.random() * Date.now())}
+                  list={list}
+                />
+              );
+            })
+          ) : (
+            <p className="text-center">No Data Available!</p>
+          )
+        ) : (
+          <div className="text-center">
+            <img
+              src={loadingImg}
+              className="load_icon"
+              alt="Loading animation"
+            />
+          </div>
+        )}
       </div>
     </div>
   );

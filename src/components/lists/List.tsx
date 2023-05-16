@@ -1,22 +1,37 @@
-const List = () => {
+import { IListData } from "../../store/actions/types";
+import { Link } from "react-router-dom";
+
+interface IListProp {
+  list: IListData;
+}
+const List = ({ list }: IListProp) => {
   return (
     <div className="card list-card">
       <div className="list-details">
         <span className="priority">
-          Priority: <b className="text">{"High"}</b>{" "}
+          Category: <b className="text">{list.category.join(", ")}</b>
         </span>
         <br />
         <span className="date">
           <i className="far fa-clock"> </i>
-          {` ` + new Date().toDateString()}, {new Date().toLocaleTimeString()}
+          {` ` + new Date(list.created).toDateString()},{" "}
+          {new Date(list.created).toLocaleTimeString()}
         </span>
-        <h3>{"A title"}</h3>
+        <h3>{list.name}</h3>
 
-        <p>{"A description"}</p>
+        <p>{list.description}</p>
 
         <div className="category-status">
-          <span className="category">{"A category"}</span>
-          <span className={"A status"}>{"A status"}</span>
+          <Link
+            className="category"
+            to="#"
+            onClick={(e) => {
+              e.preventDefault();
+              window.open(list.link);
+            }}
+          >
+            Visit Site
+          </Link>
         </div>
       </div>
     </div>
