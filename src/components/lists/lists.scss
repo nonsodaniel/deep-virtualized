@@ -1,0 +1,114 @@
+@import "../utils/utils.scss";
+.lists-wrap {
+  .list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+    grid-gap: 2em;
+    justify-items: stretch;
+    align-items: stretch;
+    margin-bottom: 3rem;
+  }
+  .list-header {
+    font-weight: 400;
+    color: #3f3e3e;
+    padding-bottom: 1rem;
+  }
+  .list-card {
+    .list-details {
+      padding: 1rem;
+      max-height: 16rem;
+
+      .date {
+        color: #6c757d;
+        font-weight: 500;
+      }
+    }
+
+    .priority .text {
+      font-size: 13px;
+      font-weight: 600;
+      color: #7888fc;
+    }
+    .category-status {
+      @include spaceBetween;
+      border-top: 2px solid #e7e4e4;
+      padding-top: 1rem;
+      margin-top: 0;
+      span {
+        padding: 0.3rem 0.9rem;
+        border-radius: 15px;
+      }
+      .category {
+        background-color: #efe8ff;
+        border-color: #efe8ff;
+        color: #9c6efc;
+      }
+    }
+
+    h3 {
+      font-weight: 600;
+      color: #333447;
+      margin: 0.5rem 0;
+      font-size: 18px;
+    }
+    p {
+      font-weight: 400;
+      font-style: normal;
+      font-size: 14px;
+      line-height: 18px;
+      margin-bottom: 0.8rem;
+      color: #3f3e3e;
+      height: 5rem;
+    }
+    span {
+      font-size: 12px;
+    }
+  }
+
+  .network-error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .btn-network__error {
+      padding: 10px 40px;
+      border-radius: 2px;
+      border: none;
+      color: white;
+      background: #007bff;
+      margin-top: 1rem;
+    }
+  }
+
+  .load_icon {
+    width: 50%;
+  }
+  .no-lists {
+    margin-bottom: 3rem;
+  }
+  .btn-wrap {
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 868px) {
+    .lists {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .load_icon {
+      width: 100%;
+    }
+    .edit,
+    .delete {
+      font-size: 20px;
+    }
+  }
+  @media (max-width: 560px) {
+    .lists {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+  }
+}
