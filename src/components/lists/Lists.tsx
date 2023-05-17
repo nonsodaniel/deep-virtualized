@@ -12,10 +12,18 @@ interface IListsProps {
   loading: boolean;
   errorMessage: string;
   getLists: () => void;
+  isOpen: boolean;
+  closeModal: () => void;
 }
 
-const Lists = ({ data, getLists, loading, errorMessage }: IListsProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Lists = ({
+  data,
+  getLists,
+  loading,
+  errorMessage,
+  isOpen,
+  closeModal,
+}: IListsProps) => {
   const isDataLoaded = data && data.length > 0;
   useEffect(() => {
     getLists();
@@ -23,16 +31,6 @@ const Lists = ({ data, getLists, loading, errorMessage }: IListsProps) => {
   let select = useSelector((state) => state);
 
   const editData: any = [];
-  const openModal = (action: string) => {
-    if (action === "add") {
-      //   clearEditTodo();
-    }
-    //setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    //setIsOpen(false)
-  };
 
   return (
     <div className="lists-wrap" data-testid="lists-wrap">

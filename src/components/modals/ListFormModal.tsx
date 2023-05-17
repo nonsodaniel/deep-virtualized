@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import { useDispatch } from "react-redux";
 import { categorList } from "../utils/db";
 import { IListData, ListCategory } from "../../store/actions/types";
+import "./modal.scss";
 interface IListFormModalProps {
   list: IListData[];
   isOpen: boolean;
