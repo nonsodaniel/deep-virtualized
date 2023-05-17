@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import * as actions from "../../store/actions/listActions";
 import Modal from "react-modal";
 import { useDispatch } from "react-redux";
-import { categorList } from "../utils/db";
 import { IListData, ListCategory } from "../../store/actions/types";
 import "./modal.scss";
 interface IListFormModalProps {
@@ -36,7 +35,7 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
   const [category, setCategory] = useState<ListCategory[]>([]);
   const [created, setCreated] = useState("");
   const [link, setLink] = useState("");
-  let listId = 1;
+  let listId = "";
 
   const getFormData = () => {
     return {
@@ -44,12 +43,14 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
       description,
       category,
       link,
+      created: new Date(),
     };
   };
 
   const addOrUpdateList = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     let formdata = getFormData();
+
     if (listId) {
       dispatch(actions.updateList({ ...list, ...formdata }));
       resetForm();
@@ -64,11 +65,24 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
   const resetForm = () => {
     setName("");
     setDesc("");
+    setLink("");
     setCategory([]);
   };
 
   const handleClose = () => {
     onClose();
+  };
+
+  const handleCheckboxChange = ({ target }: any) => {
+    const { value, checked } = target;
+    // The user checks the box
+    if (checked) {
+      setCategory([...category, value]);
+    }
+    // The user unchecks the box
+    else {
+      setCategory(category.filter((e) => e !== value));
+    }
   };
 
   useEffect(() => {
@@ -84,6 +98,7 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
     //setEditData(list);
   }, [list, dispatch]);
 
+  console.log("category", category);
   return (
     <div className="list-modal">
       <Modal
@@ -126,38 +141,49 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
                 required={true}
               ></textarea>
             </div>
-            <div className="form-group group-1">
-              <div className="priority">
+            <div className="form-group checkbox-group">
+              <div>
                 <input
-                  type="text"
-                  className="form-control"
-                  id="created"
-                  placeholder="Date Created"
-                  value={name}
-                  maxLength={35}
-                  onChange={({ target }) => setCreated(target.value)}
-                  required={true}
+                  type="checkbox"
+                  id="health"
+                  name="category"
+                  value="Health"
+                  onChange={handleCheckboxChange}
                 />
+                <label htmlFor="health">Health</label>
               </div>
-              <div className="category">
-                <select
-                  className="form-control"
-                  id="category"
-                  value={category}
-                  onChange={({ target }) => setCategory([])}
-                  required={true}
-                >
-                  <option value="">Category</option>
-                  {categorList.map((catgry) => {
-                    let { id, value } = catgry;
-                    return (
-                      <option key={id} value={value}>
-                        {value}
-                      </option>
-                    );
-                  })}
-                </select>
+              <div>
+                <input
+                  type="checkbox"
+                  id="ecommerce"
+                  name="category"
+                  value="E-commerce"
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor="ecommerce">E-commerce</label>
               </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="education"
+                  name="category"
+                  value="Education"
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor="education">Education</label>
+              </div>
+            </div>
+            <div className="form-group">
+              <input
+                type="url"
+                className="form-control"
+                id="link"
+                placeholder="Drop a valid Link"
+                value={link}
+                maxLength={35}
+                onChange={({ target }) => setLink(target.value)}
+                required={true}
+              />
             </div>
 
             <div className="btn-wrap">

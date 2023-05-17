@@ -33,6 +33,9 @@ body {
 .btn-add {
   background-color: #0061bc;
 }
+.btn-update {
+  background-color: #0095ff;
+}
 .card {
   background: #fff;
   border-radius: 0.428rem;
@@ -68,4 +71,14 @@ input[type="text"] {
 }
 .form-group {
   margin-bottom: 1rem;
+}
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  justify-content: space-between;
+}
+.checkbox-group label {
+  margin-left: 5px;
+  color: #495057;
 }

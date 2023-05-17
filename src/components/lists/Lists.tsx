@@ -30,7 +30,7 @@ const Lists = ({
   }, [getLists]);
   let select = useSelector((state) => state);
 
-  const editData: any = [];
+  const editData: any = {};
 
   return (
     <div className="lists-wrap" data-testid="lists-wrap">

@@ -13,7 +13,7 @@ const Container = () => {
   };
 
   const closeModal = () => {
-    //setIsOpen(false)
+    setIsOpen(false);
   };
   return (
     <div className="container">
