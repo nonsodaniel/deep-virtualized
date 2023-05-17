@@ -1,6 +1,7 @@
 @import "../../components/utils/utils.scss";
 
-.header-wrap {
+.header-wrap,
+.subHeader-wrap {
   @include spaceBetween;
 }
 .search-input {
