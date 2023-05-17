@@ -96,7 +96,6 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
     setEditData(list);
   }, [list, dispatch]);
 
-  console.log("category", { category, list });
   return (
     <div className="list-modal">
       <Modal

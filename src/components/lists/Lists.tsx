@@ -1,7 +1,7 @@
 import List from "./List";
 import "./lists.scss";
 import * as actions from "../../store/actions/listActions";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { useEffect } from "react";
 import { IListData } from "../../store/actions/types";
 import loadingImg from "../assets/loading.gif";
@@ -32,9 +32,6 @@ const Lists = ({
   useEffect(() => {
     getLists();
   }, [getLists]);
-  let select = useSelector((state) => state);
-  console.log("select", select);
-  // const editableData = editData && select.lists.editData;
 
   return (
     <div className="lists-wrap" data-testid="lists-wrap">

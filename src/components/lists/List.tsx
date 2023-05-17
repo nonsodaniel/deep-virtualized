@@ -9,9 +9,7 @@ interface IListProp {
 }
 const List = ({ list, openModal }: IListProp) => {
   const dispatch = useDispatch();
-  console.log(list.category);
   const editList = async ({ target: { id } }: any) => {
-    console.log("id", id);
     dispatch(actions.handleEditList(id));
     openModal("edit");
   };
