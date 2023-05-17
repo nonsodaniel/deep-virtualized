@@ -1,3 +1,5 @@
+import SubHeader from "./SubHeader";
+
 interface IHeaderProps {
   openModal: (action: string) => void;
 }
@@ -12,6 +14,7 @@ const Header = ({ openModal }: IHeaderProps) => {
           </button>
         </div>
       </div>
+      <SubHeader />
     </header>
   );
 };

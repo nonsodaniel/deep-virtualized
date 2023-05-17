@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import { useDispatch } from "react-redux";
 import { IListData, ListCategory } from "../../store/actions/types";
 import "./modal.scss";
+import Input from "../views/Input";
 interface IListFormModalProps {
   list: IListData;
   isOpen: boolean;
@@ -95,7 +96,7 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
     };
     setEditData(list);
   }, [list, dispatch]);
-
+  console.log("list", list);
   return (
     <div className="list-modal">
       <Modal
@@ -114,18 +115,15 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
         </div>
         <div className="body">
           <form onSubmit={addOrUpdateList}>
-            <div className="form-group">
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                placeholder="List Name"
-                value={name}
-                maxLength={35}
-                onChange={({ target }) => setName(target.value)}
-                required={true}
-              />
-            </div>
+            <Input
+              type="text"
+              id="name"
+              className="form-control"
+              value={name}
+              placeholder={"List Name"}
+              required={true}
+              onChange={({ target }: any) => setName(target.value)}
+            />
             <div className="form-group">
               <textarea
                 className="form-control"
@@ -173,18 +171,15 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
                 <label htmlFor="education">Education</label>
               </div>
             </div>
-            <div className="form-group">
-              <input
-                type="url"
-                className="form-control"
-                id="link"
-                placeholder="Drop a valid Link"
-                value={link}
-                maxLength={35}
-                onChange={({ target }) => setLink(target.value)}
-                required={true}
-              />
-            </div>
+            <Input
+              type="url"
+              className="form-control"
+              id="link"
+              placeholder="Drop a valid Link"
+              value={link}
+              onChange={({ target }) => setLink(target.value)}
+              required={true}
+            />
             <div className="btn-wrap">
               <button
                 type="submit"

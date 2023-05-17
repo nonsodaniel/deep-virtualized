@@ -32,7 +32,7 @@ const Lists = ({
   useEffect(() => {
     getLists();
   }, [getLists]);
-
+  console.log("state", editData);
   return (
     <div className="lists-wrap" data-testid="lists-wrap">
       <ListFormModal list={editData} isOpen={isOpen} onClose={closeModal} />
@@ -78,6 +78,7 @@ const Lists = ({
 
 const mapStateToProps = (state: any) => {
   const { data, loading, errorMessage, editData } = state.lists;
+  console.log("state", state.lists);
   return {
     data,
     loading,

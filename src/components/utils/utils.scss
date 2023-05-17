@@ -1,3 +1,7 @@
+:root {
+  --form-text: 14px;
+}
+
 @mixin spaceBetween {
   display: flex;
   justify-content: space-between;

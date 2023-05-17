@@ -8,8 +8,9 @@ const Container = () => {
   const [isOpen, setIsOpen] = useState(false);
   const openModal = (action: string) => {
     setIsOpen(true);
+    console.log("action", action);
     if (action === "add") {
-      clearEditList();
+      return clearEditList();
     }
   };
 
