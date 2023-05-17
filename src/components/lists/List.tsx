@@ -22,21 +22,22 @@ const List = ({ list, openModal }: IListProp) => {
   return (
     <div className="card list-card">
       <div className="list-details">
-        <span className="priority">
+        <span className="priority" data-testid="category-title">
           Category: <b className="text">{list.category.join(", ")}</b>
         </span>
         <br />
-        <span className="date">
+        <span className="date" data-testid="list-time">
           <i className="far fa-clock"> </i>
           {` ` + new Date(list.created).toDateString()},{" "}
           {new Date(list.created).toLocaleTimeString()}
         </span>
-        <h3>{list.name}</h3>
+        <h3 data-testid="list-name">{list.name}</h3>
 
-        <p>{list.description}</p>
+        <p data-testid="list-description">{list.description}</p>
 
         <div className="category-status">
           <Link
+            data-testid="category-status"
             className="category"
             to="#"
             onClick={(e) => {
