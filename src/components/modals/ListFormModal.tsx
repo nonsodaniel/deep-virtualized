@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { IListData, ListCategory } from "../../store/actions/types";
 import "./modal.scss";
 import Input from "../views/Input";
+import Button from "../views/Button";
+import Checkbox from "../views/Checkbox";
 interface IListFormModalProps {
   list: IListData;
   isOpen: boolean;
@@ -47,6 +49,7 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
 
   const addOrUpdateList = (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    if (!category.length) return alert("Kindly select one ore more Category");
     let formdata = getFormData();
 
     if (list) {
@@ -137,39 +140,32 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
               ></textarea>
             </div>
             <div className="form-group checkbox-group">
-              <div>
-                <input
-                  type="checkbox"
-                  id="health"
-                  name="category"
-                  value="Health"
-                  onChange={handleCheckboxChange}
-                  checked={category.includes("Health")}
-                />
-                <label htmlFor="health">Health</label>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  id="ecommerce"
-                  name="category"
-                  value="E-commerce"
-                  onChange={handleCheckboxChange}
-                  checked={category.includes("E-commerce")}
-                />
-                <label htmlFor="ecommerce">E-commerce</label>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  id="education"
-                  name="category"
-                  value="Education"
-                  onChange={handleCheckboxChange}
-                  checked={category.includes("Education")}
-                />
-                <label htmlFor="education">Education</label>
-              </div>
+              <Checkbox
+                type="checkbox"
+                id="health"
+                name="category"
+                value="Health"
+                onChange={handleCheckboxChange}
+                checked={category.includes("Health")}
+              />
+
+              <Checkbox
+                type="checkbox"
+                id="ecommerce"
+                name="category"
+                value="E-commerce"
+                onChange={handleCheckboxChange}
+                checked={category.includes("E-commerce")}
+              />
+
+              <Checkbox
+                type="checkbox"
+                id="education"
+                name="category"
+                value="Education"
+                onChange={handleCheckboxChange}
+                checked={category.includes("Education")}
+              />
             </div>
             <Input
               type="url"
@@ -181,12 +177,11 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
               required={true}
             />
             <div className="btn-wrap">
-              <button
+              <Button
                 type="submit"
                 className={`btn ${list ? "btn-update" : "btn-add"}`}
-              >
-                {list ? "Update List" : "Add List"}
-              </button>
+                text={list ? "Update List" : "Add List"}
+              />
             </div>
           </form>
         </div>

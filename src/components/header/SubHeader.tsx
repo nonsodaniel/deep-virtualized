@@ -3,8 +3,9 @@ import * as actions from "../../store/actions/listActions";
 import { useDispatch } from "react-redux";
 
 import "./header.scss";
-import { categorList } from "../utils/db";
+import { categorList, dateList } from "../utils/db";
 import { useState } from "react";
+import Select from "../views/Select";
 
 const SubHeader = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -42,41 +43,33 @@ const SubHeader = () => {
           <div className="sort-row">
             <span className="sort-items sort-title">Sort By: </span>
             <div className="select-wrap sort-items">
-              <label htmlFor="sortCategory" className="sort-label">
-                Category
-              </label>
-              <select
+              <Select
+                id="sort-category-option"
+                value="All"
                 className="select-item"
-                aria-label="select"
+                ariaLabel="select"
+                label="Category"
+                htmlFor="sortCategory"
+                description="Select Category"
                 onChange={sortCategory}
-                data-testid="sort-category"
-              >
-                <option value="All"> Select Category</option>
-                {categorList.map((catgry) => {
-                  let { id, value } = catgry;
-                  return (
-                    <option key={id} value={value}>
-                      {value}
-                    </option>
-                  );
-                })}
-              </select>
+                dataTestId="sort-category"
+                options={categorList}
+              />
             </div>
+
             <div className="select-wrap sort-items">
-              <label htmlFor="sortDate" className="sort-label">
-                Date
-              </label>
-              <select
+              <Select
+                id="sort-date-option"
+                value="default"
                 className="select-item"
-                aria-label="select"
+                ariaLabel="select"
+                label="Date"
+                htmlFor="sortDate"
+                description="Select Date order"
                 onChange={sortDate}
-                data-testid="sort-date"
-              >
-                {}
-                <option value="default">Select Date order</option>
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
-              </select>
+                dataTestId="sort-category"
+                options={dateList}
+              />
             </div>
           </div>
         </div>

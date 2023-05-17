@@ -1,3 +1,4 @@
+import Button from "../views/Button";
 import SubHeader from "./SubHeader";
 
 interface IHeaderProps {
@@ -9,9 +10,12 @@ const Header = ({ openModal }: IHeaderProps) => {
       <div className="header-wrap text-center">
         <h1 className="title">Virtualized list</h1>
         <div className="btn-wrap">
-          <button className="btn btn-add" onClick={() => openModal("add")}>
-            Add new item
-          </button>
+          <Button
+            type={"button"}
+            className="btn btn-add"
+            onClick={() => openModal("add")}
+            text="Add new item"
+          />
         </div>
       </div>
       <SubHeader />

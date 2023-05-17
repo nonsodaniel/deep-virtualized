@@ -122,11 +122,11 @@ export const reducer = (state = INTIAL_STATE, actions: any) => {
       let sortDateData =
         activeDate === "default"
           ? state.allLists
-          : activeDate === "asc"
+          : activeDate === "Ascending"
           ? [...state.allLists].sort((a, b) =>
               a.created.localeCompare(b.created)
             )
-          : activeDate === "desc"
+          : activeDate === "Descending"
           ? [...state.allLists].sort((a, b) =>
               b.created.localeCompare(a.created)
             )
