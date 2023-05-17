@@ -107,7 +107,7 @@ export const handleDeletelist = (id: string) => {
   return (dispatch: Dispatch, getState: () => any) => {
     const state = getState();
     const lists = [...state.lists.allLists];
-    let listsLeft = lists.filter((list) => id !== list.id);
+    let listsLeft = lists.filter((list) => id !== list.created);
     saveToLocalStorage("lists", listsLeft);
     dispatch({
       type: SET_LIST_DATA,

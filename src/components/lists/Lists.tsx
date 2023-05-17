@@ -2,7 +2,7 @@ import List from "./List";
 import "./lists.scss";
 import * as actions from "../../store/actions/listActions";
 import { connect, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { IListData } from "../../store/actions/types";
 import loadingImg from "../assets/loading.gif";
 import networkImg from "../assets/no-connection.png";

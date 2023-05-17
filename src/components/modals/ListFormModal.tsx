@@ -33,11 +33,7 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
   const [name, setName] = useState("");
   const [description, setDesc] = useState("");
   const [category, setCategory] = useState<ListCategory[]>([]);
-  const [created, setCreated] = useState("");
   const [link, setLink] = useState("");
-  let listId = "";
-
-  console.log("list", list);
   const getFormData = () => {
     return {
       name,
