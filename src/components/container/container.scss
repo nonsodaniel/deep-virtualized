@@ -16,10 +16,26 @@
     text-align: right;
   }
 }
+@media (max-width: 1200px) {
+  .subHeader-wrap {
+    grid-template-columns: 1fr;
+  }
+}
 
 @media (max-width: 768px) {
   .container {
     padding-right: 1rem;
     padding-left: 1rem;
+  }
+}
+
+@media (max-width: 490px) {
+  .header-wrap {
+    justify-content: center;
+    grid-template-columns: none;
+    .btn-wrap {
+      text-align: center;
+      margin-top: 1rem;
+    }
   }
 }

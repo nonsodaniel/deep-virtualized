@@ -25,7 +25,7 @@ const SubHeader = () => {
   return (
     <header className="header" data-testid="header">
       <form action="">
-        <div className="header-wrap">
+        <div className="subHeader-wrap">
           <div className="search-input">
             <input
               type="text"
