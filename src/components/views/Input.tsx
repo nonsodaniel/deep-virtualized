@@ -5,7 +5,7 @@ interface IInputProps {
   placeholder: string;
   value: string;
   required: boolean;
-  onChange: (target: any) => void;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const Input = ({

@@ -8,7 +8,7 @@ interface ISelectProps {
   htmlFor: string;
   description: string;
   dataTestId: string;
-  onChange: (target: any) => void;
+  onChange: React.ChangeEventHandler<HTMLSelectElement>;
 }
 
 const Select = ({
@@ -36,7 +36,7 @@ const Select = ({
         data-testid={dataTestId}
       >
         <option value={value}>{description} </option>
-        {options.map((option: any) => {
+        {options.map((option: { id: number; value: string }) => {
           let { id, value } = option;
           return (
             <option key={id} value={value}>

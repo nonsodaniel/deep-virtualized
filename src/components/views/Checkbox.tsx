@@ -4,7 +4,7 @@ interface ICheckboxProps {
   type: string;
   value: string;
   checked: boolean;
-  onChange: (target: any) => void;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 const Checkbox = ({
   id,

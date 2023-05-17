@@ -11,14 +11,20 @@ const SubHeader = () => {
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
 
-  const handleSearch = ({ target }: any) => {
+  const handleSearch: React.ChangeEventHandler<HTMLInputElement> = ({
+    target,
+  }) => {
     setSearchValue(target.value);
     dispatch(actions.handleSearchList(target.value));
   };
-  const sortCategory = ({ target }: any) => {
+  const sortCategory: React.ChangeEventHandler<HTMLSelectElement> = ({
+    target,
+  }) => {
     dispatch(actions.handleSortCategory(target.value));
   };
-  const sortDate = ({ target }: any) => {
+  const sortDate: React.ChangeEventHandler<HTMLSelectElement> = ({
+    target,
+  }) => {
     dispatch(actions.handleSortDate(target.value));
   };
 

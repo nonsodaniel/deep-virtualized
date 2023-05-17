@@ -13,6 +13,7 @@ import {
   IListData,
 } from "./types";
 import { Get } from "../../config/apiServices";
+import { ThunkActionCreator } from "../store";
 
 interface IPayload {
   lists?: IListData;
@@ -40,10 +41,10 @@ export const getLists = () => {
             "lists",
             JSON.stringify(response.data.splice(0, 200))
           );
-          dispatch({ type: SET_LIST_DATA, payload });
+          return dispatch({ type: SET_LIST_DATA, payload });
         } else {
           payload.errorMsg = "failed to fetch data";
-          dispatch({ type: SET_LIST_DATA, payload });
+          return dispatch({ type: SET_LIST_DATA, payload });
         }
       }
     } catch (error) {
@@ -57,11 +58,13 @@ export const getLists = () => {
   };
 };
 
-export const addlist = (list: Omit<IListData, "created" | "link">) => {
-  return (dispatch: Dispatch, getState: () => any) => {
+export const addlist: ThunkActionCreator<void> = (
+  list: Omit<IListData, "created" | "link">
+) => {
+  return (dispatch: Dispatch, getState) => {
     const state = getState();
     list.id = uuid();
-    const lists = [list, ...state.lists.allLists];
+    const lists = [list, ...state.lists.data];
     saveToLocalStorage("lists", lists);
     dispatch({
       type: SET_LIST_DATA,
@@ -70,17 +73,21 @@ export const addlist = (list: Omit<IListData, "created" | "link">) => {
   };
 };
 
-export const updateList = (list: Omit<IListData, "created">) => {
-  return (dispatch: Dispatch, getState: () => any) => {
+export const updateList: ThunkActionCreator<void> = (
+  list: Omit<IListData, "created">
+) => {
+  return (dispatch: Dispatch, getState) => {
     const state = getState();
-    const lists = [...state.lists.allLists];
+    const lists = [...state.lists.data];
     let listToUpdate = lists.find(({ id }) => id === list.id);
-    Object.assign(listToUpdate, list);
-    saveToLocalStorage("lists", lists);
-    dispatch({
-      type: SET_LIST_DATA,
-      payload: { lists },
-    });
+    if (listToUpdate) {
+      Object.assign(listToUpdate, list);
+      saveToLocalStorage("lists", lists);
+      dispatch({
+        type: SET_LIST_DATA,
+        payload: { lists },
+      });
+    }
   };
 };
 
@@ -115,7 +122,9 @@ export const handleDeletelist = (id: string) => {
   };
 };
 
-export const handleSearchList = (searchValue: string) => {
+export const handleSearchList: ThunkActionCreator<void> = (
+  searchValue: string
+) => {
   return (dispatch: Dispatch) => {
     dispatch({
       type: SEARCH_LIST,

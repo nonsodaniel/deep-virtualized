@@ -74,11 +74,12 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
     onClose();
   };
 
-  const handleCheckboxChange = ({ target }: any) => {
-    const { value, checked } = target;
+  const handleCheckboxChange = (event: { target: HTMLInputElement }) => {
+    const value = (event.target as HTMLInputElement).value;
+    const checked = (event.target as HTMLInputElement).checked;
     // The user checks the box
     if (checked) {
-      setCategory([...category, value]);
+      setCategory([...category, value as ListCategory]);
     }
     // The user unchecks the box
     else {
@@ -94,6 +95,7 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
         setCategory(list.category);
         setLink(list.link);
       } else {
+        console.log("reset");
         resetForm();
       }
     };
@@ -125,7 +127,7 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
               value={name}
               placeholder={"List Name"}
               required={true}
-              onChange={({ target }: any) => setName(target.value)}
+              onChange={(event) => setName(event.target.value)}
             />
             <div className="form-group">
               <textarea

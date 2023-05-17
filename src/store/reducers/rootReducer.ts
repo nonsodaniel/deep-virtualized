@@ -1,6 +1,13 @@
 import { combineReducers } from "redux";
+import { APP_ACTIONS, listReducerState } from "../actions/types";
 import listReducers from "./listReducers";
 
-export default combineReducers({
+export type AppState = {
+  lists: listReducerState;
+};
+
+export type AppActionTypes = APP_ACTIONS;
+
+export const rootReducer = combineReducers({
   lists: listReducers,
 });

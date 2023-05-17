@@ -19,13 +19,27 @@ export interface IListData {
   created: string;
 }
 
-export interface IInitial_State {
-  allLists: IListData[];
+export interface listReducerState {
   data: IListData[];
-  error: boolean;
-  loading: boolean;
-  errorMessage?: string;
-  searchValue?: string;
+  searchValue: string | undefined;
   search: boolean;
   currentCategory: string;
+  error: boolean;
+  loading: boolean;
+  errorMessage: string;
+  editData: IListData | null;
+  searchResults: IListData[] | null;
+}
+
+export interface APP_ACTIONS {
+  type: string;
+  payload: {
+    lists?: IListData[];
+    errorMsg?: string;
+    id?: string;
+    editId?: string;
+    searchValue?: string;
+    activeCategory: string;
+    activeDate: string;
+  };
 }

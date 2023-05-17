@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import Container from "./components/container/Container";
-import store from "./store/store";
+import { store } from "./store/store";
 
 function App() {
   return (

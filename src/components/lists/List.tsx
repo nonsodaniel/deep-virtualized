@@ -9,14 +9,18 @@ interface IListProp {
 }
 const List = ({ list, openModal }: IListProp) => {
   const dispatch = useDispatch();
-  const editList = async ({ target: { id } }: any) => {
-    dispatch(actions.handleEditList(id));
+  const editList: React.MouseEventHandler<HTMLElement> | undefined = async (
+    event
+  ) => {
+    const target = event.target as HTMLInputElement;
+    dispatch(actions.handleEditList(target.id));
     openModal("edit");
   };
-  const deleteList = ({ target: { id } }: any) => {
+  const deleteList: React.MouseEventHandler<HTMLElement> = (event) => {
+    const target = event.target as HTMLInputElement;
     let isDelete = window.confirm("Delete this record?");
     if (isDelete) {
-      dispatch(actions.handleDeletelist(id));
+      dispatch(actions.handleDeletelist(target.id));
     }
   };
   return (

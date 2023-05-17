@@ -1,6 +1,6 @@
 import Header from "./Header";
 import { render, cleanup, screen, fireEvent } from "@testing-library/react";
-import store from "../../store/store";
+import { store } from "../../store/store";
 import { Provider } from "react-redux";
 import SubHeader from "./SubHeader";
 

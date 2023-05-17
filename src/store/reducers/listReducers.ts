@@ -5,24 +5,27 @@ import {
   SEARCH_LIST,
   SORT_CATEGORY,
   SORT_DATE,
-  IInitial_State,
+  listReducerState,
   EDIT_LIST,
   DELETE_LIST,
   CLEAR_EDIT_LIST,
+  APP_ACTIONS,
+  ListCategory,
 } from "../actions/types";
 
-const INTIAL_STATE: IInitial_State = {
-  allLists: [],
+const INTIAL_STATE: listReducerState = {
   data: [],
   error: false,
   loading: false,
   errorMessage: "",
   searchValue: "",
-  search: true,
+  search: false,
+  searchResults: null,
   currentCategory: "All",
+  editData: null,
 };
 
-export const reducer = (state = INTIAL_STATE, actions: any) => {
+export const reducer = (state = INTIAL_STATE, actions: APP_ACTIONS) => {
   switch (actions.type) {
     case START_FETCH_LIST:
       return { ...state, loading: true };
@@ -33,12 +36,11 @@ export const reducer = (state = INTIAL_STATE, actions: any) => {
         error: false,
         loading: false,
         errorMessage: "",
-        allLists: data,
-        data: data,
+        data,
       };
     case DELETE_LIST:
       const { id } = actions.payload;
-      let newData = state.allLists.filter((data_) => data_.created !== id);
+      let newData = state.data.filter((data_) => data_.created !== id);
       localStorage.setItem("lists", JSON.stringify(newData));
       return {
         ...state,
@@ -48,7 +50,7 @@ export const reducer = (state = INTIAL_STATE, actions: any) => {
       };
     case EDIT_LIST:
       const { editId } = actions.payload;
-      let editData = state.allLists.find((data) => data.created === editId);
+      let editData = state.data.find((data) => data.created === editId);
       return {
         ...state,
         editData,
@@ -67,27 +69,35 @@ export const reducer = (state = INTIAL_STATE, actions: any) => {
       };
     case SEARCH_LIST:
       const { searchValue } = actions.payload;
-      let searchData =
-        searchValue === ""
-          ? state.allLists
-          : state.allLists.filter(
-              ({ name, description }) =>
-                name.toLowerCase().includes(searchValue.toLowerCase()) ||
-                description.toLowerCase().includes(searchValue.toLowerCase())
-            );
+      if (!searchValue) {
+        return {
+          ...state,
+          search: false,
+          searchResults: null,
+        };
+      }
+
+      const searchResults = state.data.filter(
+        ({ name, description }) =>
+          name.toLowerCase().includes((searchValue as string).toLowerCase()) ||
+          description
+            .toLowerCase()
+            .includes((searchValue as string).toLowerCase())
+      );
+
       return {
         ...state,
         search: true,
         searchValue: searchValue,
-        data: searchData,
+        searchResults,
       };
     case SORT_CATEGORY:
       const { activeCategory } = actions.payload;
       let sortCatData =
         activeCategory === "All"
-          ? state.allLists
-          : state.allLists.filter(({ category }) =>
-              category.includes(activeCategory)
+          ? state.data
+          : state.data.filter(({ category }) =>
+              category.includes(activeCategory as ListCategory)
             );
       return {
         ...state,
@@ -101,15 +111,11 @@ export const reducer = (state = INTIAL_STATE, actions: any) => {
       const { activeDate } = actions.payload;
       let sortDateData =
         activeDate === "default"
-          ? state.allLists
+          ? state.data
           : activeDate === "Ascending"
-          ? [...state.allLists].sort((a, b) =>
-              a.created.localeCompare(b.created)
-            )
+          ? [...state.data].sort((a, b) => a.created.localeCompare(b.created))
           : activeDate === "Descending"
-          ? [...state.allLists].sort((a, b) =>
-              b.created.localeCompare(a.created)
-            )
+          ? [...state.data].sort((a, b) => b.created.localeCompare(a.created))
           : null;
       return {
         ...state,

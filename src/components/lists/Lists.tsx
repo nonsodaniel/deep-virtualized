@@ -7,6 +7,7 @@ import { IListData } from "../../store/actions/types";
 import loadingImg from "../assets/loading.gif";
 import networkImg from "../assets/no-connection.png";
 import ListFormModal from "../modals/ListFormModal";
+import { AppState } from "../../store/reducers/rootReducer";
 interface IListsProps {
   data: IListData[];
   loading: boolean;
@@ -15,7 +16,8 @@ interface IListsProps {
   isOpen: boolean;
   closeModal: () => void;
   openModal: (action: string) => void;
-  editData: IListData;
+  editData: IListData | null;
+  searchResults: IListData[] | null;
 }
 
 const Lists = ({
@@ -27,15 +29,20 @@ const Lists = ({
   closeModal,
   openModal,
   editData,
+  searchResults,
 }: IListsProps) => {
-  const isDataLoaded = data && data.length > 0;
   useEffect(() => {
     getLists();
   }, [getLists]);
-  console.log("state", editData);
+
+  const viewData = searchResults === null ? data : searchResults;
+  const isDataLoaded = viewData && viewData.length > 0;
+
   return (
     <div className="lists-wrap" data-testid="lists-wrap">
-      <ListFormModal list={editData} isOpen={isOpen} onClose={closeModal} />
+      {isOpen && editData && (
+        <ListFormModal list={editData} isOpen={isOpen} onClose={closeModal} />
+      )}
       <div className={isDataLoaded ? "lists card" : "no-list"}>
         {errorMessage === "Network Error" ? (
           <div className="text-center network-error">
@@ -50,7 +57,7 @@ const Lists = ({
           </div>
         ) : !loading ? (
           isDataLoaded ? (
-            data.map((list) => {
+            viewData.map((list) => {
               return (
                 <List
                   key={Math.floor(Math.random() * Date.now())}
@@ -76,14 +83,14 @@ const Lists = ({
   );
 };
 
-const mapStateToProps = (state: any) => {
-  const { data, loading, errorMessage, editData } = state.lists;
-  console.log("state", state.lists);
+const mapStateToProps = (state: AppState) => {
+  const { data, loading, errorMessage, editData, searchResults } = state.lists;
   return {
     data,
     loading,
     errorMessage,
     editData,
+    searchResults,
   };
 };
 

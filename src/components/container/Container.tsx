@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { clearEditList } from "../../store/actions";
 import Header from "../header/Header";
 import Lists from "../lists/Lists";
@@ -6,11 +7,12 @@ import "./container.scss";
 
 const Container = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
   const openModal = (action: string) => {
     setIsOpen(true);
     console.log("action", action);
     if (action === "add") {
-      return clearEditList();
+      return dispatch(clearEditList());
     }
   };
 
