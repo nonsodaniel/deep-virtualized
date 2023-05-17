@@ -5,6 +5,7 @@ interface IListProp {
   list: IListData;
 }
 const List = ({ list }: IListProp) => {
+  console.log(list.category);
   return (
     <div className="card list-card">
       <div className="list-details">

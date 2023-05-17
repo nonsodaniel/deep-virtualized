@@ -59,11 +59,10 @@ export const getLists = () => {
   };
 };
 
-export const addlist = (list: IListData) => {
+export const addlist = (list: Omit<IListData, "created" | "link">) => {
   return (dispatch: Dispatch, getState: () => any) => {
     const state = getState();
     list.id = uuid();
-    list.created = new Date().toISOString();
     const lists = [list, ...state.lists.allLists];
     saveToLocalStorage("lists", lists);
     dispatch({
@@ -73,11 +72,11 @@ export const addlist = (list: IListData) => {
   };
 };
 
-export const updateList = (list: IListData) => {
+export const updateList = (list: Omit<IListData, "created">) => {
   return (dispatch: Dispatch, getState: () => any) => {
     const state = getState();
     const lists = [...state.lists.allLists];
-    let listToUpdate = lists.find(({ id }) => id === list.created);
+    let listToUpdate = lists.find(({ id }) => id === list.id);
     Object.assign(listToUpdate, list);
     saveToLocalStorage("lists", lists);
     dispatch({
