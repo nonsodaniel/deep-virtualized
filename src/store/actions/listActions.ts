@@ -94,8 +94,9 @@ export const handleEditList = (editId: string) => {
     });
   };
 };
+
 export const clearEditList = () => {
-  return (dispatch: (arg0: { type: string }) => void) => {
+  return (dispatch: Dispatch) => {
     dispatch({
       type: CLEAR_EDIT_LIST,
     });

@@ -14,6 +14,8 @@ interface IListsProps {
   getLists: () => void;
   isOpen: boolean;
   closeModal: () => void;
+  openModal: (action: string) => void;
+  editData: IListData;
 }
 
 const Lists = ({
@@ -23,14 +25,16 @@ const Lists = ({
   errorMessage,
   isOpen,
   closeModal,
+  openModal,
+  editData,
 }: IListsProps) => {
   const isDataLoaded = data && data.length > 0;
   useEffect(() => {
     getLists();
   }, [getLists]);
   let select = useSelector((state) => state);
-
-  const editData: any = {};
+  console.log("select", select);
+  // const editableData = editData && select.lists.editData;
 
   return (
     <div className="lists-wrap" data-testid="lists-wrap">
@@ -54,6 +58,7 @@ const Lists = ({
                 <List
                   key={Math.floor(Math.random() * Date.now())}
                   list={list}
+                  openModal={openModal}
                 />
               );
             })
@@ -75,11 +80,12 @@ const Lists = ({
 };
 
 const mapStateToProps = (state: any) => {
-  const { data, loading, errorMessage } = state.lists;
+  const { data, loading, errorMessage, editData } = state.lists;
   return {
     data,
     loading,
     errorMessage,
+    editData,
   };
 };
 

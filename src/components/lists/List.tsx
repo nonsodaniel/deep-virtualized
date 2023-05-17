@@ -1,11 +1,26 @@
 import { IListData } from "../../store/actions/types";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import * as actions from "../../store/actions/listActions";
 
 interface IListProp {
   list: IListData;
+  openModal: (action: string) => void;
 }
-const List = ({ list }: IListProp) => {
+const List = ({ list, openModal }: IListProp) => {
+  const dispatch = useDispatch();
   console.log(list.category);
+  const editList = async ({ target: { id } }: any) => {
+    console.log("id", id);
+    dispatch(actions.handleEditList(id));
+    openModal("edit");
+  };
+  const deleteList = ({ target: { id } }: any) => {
+    let isDelete = window.confirm("Delete this record?");
+    if (isDelete) {
+      dispatch(actions.handleDeletelist(id));
+    }
+  };
   return (
     <div className="card list-card">
       <div className="list-details">
@@ -33,6 +48,22 @@ const List = ({ list }: IListProp) => {
           >
             Visit Site
           </Link>
+          <div className="actions">
+            <span className="edit-wrap">
+              <i
+                className="fas fa-edit edit pointer"
+                onClick={editList}
+                id={list.created}
+              ></i>
+            </span>
+            <span className="delete-wrap">
+              <i
+                className="fas fa-trash-alt delete pointer"
+                onClick={deleteList}
+                id={list.created}
+              ></i>
+            </span>
+          </div>
         </div>
       </div>
     </div>

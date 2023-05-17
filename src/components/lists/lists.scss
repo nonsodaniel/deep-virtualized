@@ -39,7 +39,7 @@
       padding-top: 1rem;
       margin-top: 0;
       span {
-        padding: 0.3rem 0.9rem;
+        padding: 0.2rem 0.9rem;
         border-radius: 15px;
       }
       .category {
@@ -52,7 +52,24 @@
         text-decoration: none;
       }
     }
-
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      background: #f9f9f9;
+      font-size: 12px;
+      span {
+        font-size: 16px;
+        font-size: 16px;
+        margin-left: 13px;
+        cursor: pointer;
+      }
+      .edit {
+        color: #556ee6;
+      }
+      .delete {
+        color: #e30808;
+      }
+    }
     h3 {
       font-weight: 600;
       color: #333447;

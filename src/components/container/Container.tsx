@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { clearEditList } from "../../store/actions";
 import Header from "../header/Header";
 import Lists from "../lists/Lists";
 import "./container.scss";
@@ -8,7 +9,7 @@ const Container = () => {
   const openModal = (action: string) => {
     setIsOpen(true);
     if (action === "add") {
-      //   clearEditTodo();
+      clearEditList();
     }
   };
 
@@ -18,7 +19,7 @@ const Container = () => {
   return (
     <div className="container">
       <Header openModal={openModal} />
-      <Lists closeModal={closeModal} isOpen={isOpen} />
+      <Lists closeModal={closeModal} openModal={openModal} isOpen={isOpen} />
     </div>
   );
 };

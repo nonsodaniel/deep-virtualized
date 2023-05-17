@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { IListData, ListCategory } from "../../store/actions/types";
 import "./modal.scss";
 interface IListFormModalProps {
-  list: IListData[];
+  list: IListData;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -37,6 +37,7 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
   const [link, setLink] = useState("");
   let listId = "";
 
+  console.log("list", list);
   const getFormData = () => {
     return {
       name,
@@ -51,7 +52,7 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
     e.preventDefault();
     let formdata = getFormData();
 
-    if (listId) {
+    if (list) {
       dispatch(actions.updateList({ ...list, ...formdata }));
       resetForm();
       handleClose();
@@ -86,19 +87,20 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
   };
 
   useEffect(() => {
-    const setEditData = (list: Omit<IListData, "created" | "link">) => {
+    const setEditData = (list: Omit<IListData, "created">) => {
       if (list) {
         setName(list.name || "");
         setDesc(list.description || "");
         setCategory(list.category);
+        setLink(list.link);
       } else {
         resetForm();
       }
     };
-    //setEditData(list);
+    setEditData(list);
   }, [list, dispatch]);
 
-  console.log("category", category);
+  console.log("category", { category, list });
   return (
     <div className="list-modal">
       <Modal
@@ -112,7 +114,7 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
             <i className="far fa-times-circle close-modal"></i>
           </span>
           <h2 className="text-center">
-            {listId ? "Update List" : "Create New List"}
+            {list ? "Update List" : "Create New List"}
           </h2>
         </div>
         <div className="body">
@@ -149,6 +151,7 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
                   name="category"
                   value="Health"
                   onChange={handleCheckboxChange}
+                  checked={category.includes("Health")}
                 />
                 <label htmlFor="health">Health</label>
               </div>
@@ -159,6 +162,7 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
                   name="category"
                   value="E-commerce"
                   onChange={handleCheckboxChange}
+                  checked={category.includes("E-commerce")}
                 />
                 <label htmlFor="ecommerce">E-commerce</label>
               </div>
@@ -169,6 +173,7 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
                   name="category"
                   value="Education"
                   onChange={handleCheckboxChange}
+                  checked={category.includes("Education")}
                 />
                 <label htmlFor="education">Education</label>
               </div>
@@ -185,13 +190,12 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
                 required={true}
               />
             </div>
-
             <div className="btn-wrap">
               <button
                 type="submit"
-                className={`btn ${listId ? "btn-update" : "btn-add"}`}
+                className={`btn ${list ? "btn-update" : "btn-add"}`}
               >
-                {listId ? "Update List" : "Add List"}
+                {list ? "Update List" : "Add List"}
               </button>
             </div>
           </form>
