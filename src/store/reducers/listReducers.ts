@@ -6,7 +6,6 @@ import {
   SORT_CATEGORY,
   SORT_DATE,
   IInitial_State,
-  SORT_NAME,
   EDIT_LIST,
   DELETE_LIST,
   CLEAR_EDIT_LIST,
@@ -21,7 +20,6 @@ const INTIAL_STATE: IInitial_State = {
   searchValue: "",
   search: true,
   currentCategory: "All",
-  currentPriority: "All",
 };
 
 export const reducer = (state = INTIAL_STATE, actions: any) => {
@@ -45,7 +43,6 @@ export const reducer = (state = INTIAL_STATE, actions: any) => {
       return {
         ...state,
         search: false,
-        currentPage: 1,
         searchValue: "",
         data: newData,
       };
@@ -81,7 +78,6 @@ export const reducer = (state = INTIAL_STATE, actions: any) => {
       return {
         ...state,
         search: true,
-        currentPage: 1,
         searchValue: searchValue,
         data: searchData,
       };
@@ -96,26 +92,10 @@ export const reducer = (state = INTIAL_STATE, actions: any) => {
       return {
         ...state,
         search: false,
-        currentPage: 1,
         searchValue: "",
         data: sortCatData,
         activeCategory: activeCategory,
         currentCategory: activeCategory,
-      };
-    case SORT_NAME:
-      const { activePriority } = actions.payload;
-      let sortPrtyData =
-        activePriority === "All"
-          ? state.allLists
-          : state.allLists.filter(({ name }) => name.includes(activePriority));
-      return {
-        ...state,
-        search: false,
-        currentPage: 1,
-        searchValue: "",
-        data: sortPrtyData,
-        activePriority: activePriority,
-        currentPriority: activePriority,
       };
     case SORT_DATE:
       const { activeDate } = actions.payload;
@@ -134,7 +114,6 @@ export const reducer = (state = INTIAL_STATE, actions: any) => {
       return {
         ...state,
         search: false,
-        currentPage: 1,
         searchValue: "",
         data: sortDateData,
         activeOrder: activeDate,

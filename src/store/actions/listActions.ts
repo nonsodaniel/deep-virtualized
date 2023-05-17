@@ -8,8 +8,6 @@ import {
   SEARCH_LIST,
   SORT_CATEGORY,
   SORT_DATE,
-  SORT_ALPHABET,
-  SORT_NAME,
   EDIT_LIST,
   CLEAR_EDIT_LIST,
   IListData,
@@ -134,23 +132,7 @@ export const handleSortCategory = (activeCategory: string) => {
     });
   };
 };
-export const handleSortPriority = (activePriority: string) => {
-  return (dispatch: Dispatch) => {
-    dispatch({
-      type: SORT_NAME,
-      payload: { activePriority },
-    });
-  };
-};
 
-export const handleSortAlphabet = (activeOrder: string) => {
-  return (dispatch: Dispatch) => {
-    dispatch({
-      type: SORT_ALPHABET,
-      payload: { activeOrder },
-    });
-  };
-};
 export const handleSortDate = (activeDate: string) => {
   return (dispatch: Dispatch) => {
     dispatch({
