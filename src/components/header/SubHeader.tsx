@@ -23,7 +23,7 @@ const SubHeader = () => {
   };
 
   return (
-    <header className="header" data-testid="header">
+    <header className="header" data-testid="sub-header">
       <form action="">
         <div className="subHeader-wrap">
           <div className="search-input">
@@ -32,7 +32,7 @@ const SubHeader = () => {
               className="form-tag search-textbox"
               data-testid="search-textfield"
               aria-label="search-textfield"
-              placeholder="Search Todo (Title and Description)"
+              placeholder="Search List (Title and Description)"
               value={searchValue}
               onChange={handleSearch}
             />
@@ -67,7 +67,7 @@ const SubHeader = () => {
                 htmlFor="sortDate"
                 description="Select Date order"
                 onChange={sortDate}
-                dataTestId="sort-category"
+                dataTestId="sort-date"
                 options={dateList}
               />
             </div>
