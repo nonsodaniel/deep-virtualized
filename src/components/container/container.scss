@@ -6,6 +6,7 @@
 }
 .header {
   margin: 3rem 0;
+  width: 100%;
 }
 .header-wrap {
   display: grid;
@@ -15,10 +16,16 @@
   .btn-wrap {
     text-align: right;
   }
+  .title {
+    margin-right: -4rem;
+  }
 }
 @media (max-width: 1200px) {
   .subHeader-wrap {
     grid-template-columns: 1fr;
+  }
+  .header-wrap .title {
+    margin-right: 0;
   }
 }
 

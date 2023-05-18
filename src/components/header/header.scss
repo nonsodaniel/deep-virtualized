@@ -79,7 +79,8 @@ select {
   .search-input {
     width: 100%;
   }
-  .header-wrap {
+  .header-wrap,
+  .subHeader-wrap {
     flex-direction: column;
     margin: 1rem auto 1rem auto;
   }

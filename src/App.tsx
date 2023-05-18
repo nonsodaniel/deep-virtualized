@@ -1,17 +1,11 @@
-import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import Container from "./components/container/Container";
-import { store } from "./store/store";
+import AppContainer from "./AppContainer";
 
 function App() {
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <div className="App">
-          <Container />
-        </div>
-      </BrowserRouter>
-    </Provider>
+    <BrowserRouter>
+      <AppContainer />
+    </BrowserRouter>
   );
 }
 

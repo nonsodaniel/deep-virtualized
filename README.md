@@ -19,28 +19,21 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+# Experience
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+My experience creating this solution was a bitter-sweet one, because of the fact that I created something slightly different from the requirement.
+I created a `Scrollable list` with `Sorting, Searching, CRUD(Create, Read Update and Delete) Operation` functionalities as opposed creating a Virtualized List.
+As a result of time-constraint, I wasn't able to bring out the best of the Virtualized List but ended up creating a very basic implementation which I'm not satisfied with.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Since I really don't want to wasted efforts, I decided to keep the initial application `Scrollable list`. I created a toggle switch to enable the users then control both views. `Virtualized List` and `Scrollable list` which takes a little time sometimes.
+Note that this wasn't what was fully required and doesn't completely meet the standard.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## What would you have done better?
 
-### `yarn eject`
+-Due to the data been loaded at once `25,206 lists`, it take some time to be loaded and might affect the page performance. I'd definitely do better by ensuring the rendering process is correctly optimized and the application fully meets the stated requirement.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+-Enhance the style of the list and list items, add `Sort and Search` functionalities and make sure it's 100% Bug-free.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Challenges faced
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Encountered some challenges with `React-testing-library` setup, and also the `Redux store configuration`. My biggest challenge was mistakenly working on a different implementation initially which reduced the time I had left to work on the actual implementation.
