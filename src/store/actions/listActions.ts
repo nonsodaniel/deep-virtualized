@@ -102,7 +102,6 @@ export const handleEditList = (editId: string) => {
 
 export const clearEditList = () => {
   return (dispatch: Dispatch) => {
-    console.log("fired");
     dispatch({
       type: CLEAR_EDIT_LIST,
     });

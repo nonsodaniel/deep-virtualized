@@ -10,7 +10,6 @@ const Container = () => {
   const dispatch = useDispatch();
   const openModal = (action: string) => {
     setIsOpen(true);
-    console.log("action", action);
     if (action === "add") {
       return dispatch(clearEditList());
     }
