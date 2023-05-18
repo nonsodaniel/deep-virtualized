@@ -1,4 +1,5 @@
 import { IListData } from "../../../store/actions/types";
+import Card from "../../views/Card";
 import "./listcard.scss";
 
 interface IListCard {
@@ -6,8 +7,11 @@ interface IListCard {
 }
 
 const ListCard = ({ item }: IListCard) => {
-  console.log("item", item);
-  return <div className="">{"hello"}</div>;
+  return (
+    <div className="">
+      <Card list={item} />
+    </div>
+  );
 };
 
 export default ListCard;

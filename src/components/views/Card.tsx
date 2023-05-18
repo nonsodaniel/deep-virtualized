@@ -4,11 +4,12 @@ import { IListData } from "../../store/actions/types";
 
 interface ICardprops {
   list: IListData;
-  editList: React.MouseEventHandler<HTMLElement>;
-  deleteList: React.MouseEventHandler<HTMLElement>;
+  editList?: React.MouseEventHandler<HTMLElement>;
+  deleteList?: React.MouseEventHandler<HTMLElement>;
 }
 
 const Card = ({ list, editList, deleteList }: ICardprops) => {
+  console.log("yea", list);
   return (
     <div className="card list-card">
       <div className="list-details">
