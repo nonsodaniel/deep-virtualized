@@ -5,7 +5,7 @@ interface IVirtualizer {
   list: IListData[];
   Component: React.ComponentType<any>;
   threshold?: number;
-  gap: any;
+  gap: number;
   keyEtractorFunction: any;
 }
 
@@ -59,18 +59,19 @@ const Virtualizer = ({
     >
       {list?.slice(listToRender.start, listToRender.end).map((item, index) => {
         console.log("key", keyEtractorFunction?.(item));
+        const computeTop = (listToRender.start + index) * elHeigt;
         return (
           <div
             className="virtualized-item"
             style={{
+              //@ts-ignore
               "--gap": `${gap}px`,
-              "--top": `${(listToRender.start + index) * elHeigt}px`,
+              "--top": `${computeTop}px`,
               position: "relative",
             }}
             key={keyEtractorFunction?.(item)}
           >
             <Component item={item} />
-            {console.log("list", { list, item })}
           </div>
         );
       })}

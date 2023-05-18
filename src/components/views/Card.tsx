@@ -9,7 +9,6 @@ interface ICardprops {
 }
 
 const Card = ({ list, editList, deleteList }: ICardprops) => {
-  console.log("yea", list);
   return (
     <div className="card list-card">
       <div className="list-details">
