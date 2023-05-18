@@ -16,7 +16,7 @@ const TodoList = ({ data, getLists }: ITodoListList) => {
   useEffect(() => {
     getLists();
   }, [getLists]);
-  console.log(data);
+
   return (
     <div className="container">
       <div className="inner-container">

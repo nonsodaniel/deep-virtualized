@@ -79,7 +79,7 @@ const Lists = ({
 
 const mapStateToProps = (state: AppState) => {
   const { data, loading, errorMessage, editData, searchResults } = state.lists;
-  console.log("state", state);
+
   return {
     data,
     loading,

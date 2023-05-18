@@ -16,8 +16,6 @@ const Virtualizer = ({
   gap = 0,
   keyEtractorFunction,
 }: IVirtualizer) => {
-  console.log("keyEtractorFunction", { list, keyEtractorFunction });
-
   const [listToRender, setListToRender] = useState({ start: 0, end: 1 });
   const [elHeigt, setElHeight] = useState(0);
   const parentContainerRef: any = useRef(null);
@@ -61,7 +59,6 @@ const Virtualizer = ({
       onWheel={calcListToRender}
     >
       {list?.slice(listToRender.start, listToRender.end).map((item, index) => {
-        console.log("key", keyEtractorFunction?.(item));
         const computeTop = (listToRender.start + index) * elHeigt;
         return (
           <div

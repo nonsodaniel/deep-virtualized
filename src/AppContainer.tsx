@@ -19,7 +19,6 @@ const AppContainer = ({ loading }: IApp) => {
 
   useEffect(() => {
     const computeToggle = () => {
-      console.log("toggleSwitch", isCacheActive);
       if (!isCacheActive) {
         localStorage.removeItem("lists");
       }
@@ -27,7 +26,6 @@ const AppContainer = ({ loading }: IApp) => {
     };
     computeToggle();
   }, [isCacheActive, dispatch]);
-  console.log("loading", loading);
   return (
     <>
       <div className="toggle-wrap">
