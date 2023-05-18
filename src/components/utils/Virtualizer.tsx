@@ -65,11 +65,11 @@ const Virtualizer = ({
             style={{
               "--gap": `${gap}px`,
               "--top": `${(listToRender.start + index) * elHeigt}px`,
-              // position: "relative",
+              position: "relative",
             }}
             key={keyEtractorFunction?.(item)}
           >
-            <Component {...item} />
+            <Component item={item} />
             {console.log("list", { list, item })}
           </div>
         );
