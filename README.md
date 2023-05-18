@@ -22,7 +22,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 # Experience
 
 My experience creating this solution was a bitter-sweet one, because of the fact that I created something slightly different from the requirement.
-I created a Scrollable list with `Sorting and Searching` functionalities as opposed creating a Virtualized List.
+I created a Scrollable list with `Sorting, Searching, CRUD(Create, Read Update and Delete) Operation` functionalities as opposed creating a Virtualized List.
 As a result of time-constraint, I wasn't able to bring out the best of the Virtualized List but ended up creating a very basic implementation which I'm not satisfied with.
 
 ## What would you have done better?
