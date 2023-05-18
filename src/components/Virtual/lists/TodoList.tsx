@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import "./todolist.scss";
 import Virtualizer from "../../utils/Virtualizer";
 import ListCard from "../listCard/ListCard";
+import LoadingState from "../../views/LoadingState";
 interface ITodoListList {
   data: IListData[];
   loading: boolean;
@@ -19,12 +20,16 @@ const TodoList = ({ data, getLists }: ITodoListList) => {
   return (
     <div className="container">
       <div className="inner-container">
-        <Virtualizer
-          list={data}
-          Component={ListCard}
-          gap={4}
-          keyEtractorFunction={(item: { created: string }) => item.created}
-        />
+        {data.length ? (
+          <Virtualizer
+            list={data}
+            Component={ListCard}
+            gap={4}
+            keyEtractorFunction={(item: { created: string }) => item.created}
+          />
+        ) : (
+          <LoadingState />
+        )}
       </div>
     </div>
   );

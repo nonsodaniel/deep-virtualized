@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { IListData } from "../../store/actions/types";
 import "./virtualizer.scss";
 interface IVirtualizer {
@@ -22,26 +22,9 @@ const Virtualizer = ({
   const [elHeigt, setElHeight] = useState(0);
   const parentContainerRef: any = useRef(null);
 
-  useEffect(
-    function () {
-      const timeout = setTimeout(function () {
-        const childElement = parentContainerRef.current?.children[0];
-        const elHeight = childElement.offsetHeight + 2 * gap;
-        setElHeight(elHeight);
-        parentContainerRef.current?.setAttribute(
-          "style",
-          `height:${elHeight * list.length}px`
-        );
-        calcListToRender();
-        clearTimeout(timeout);
-      });
-    },
-    [gap, list]
-  );
-
-  const calcListToRender = function () {
+  const calcListToRender = useCallback(() => {
     const containerHeight =
-      parentContainerRef.current.parentElement.offsetHeight;
+      parentContainerRef.current.parentElement?.offsetHeight;
     const scrollTop = parentContainerRef.current.parentElement.scrollTop;
     const startIndex = Math.max(0, Math.floor(scrollTop / elHeigt) - threshold);
     const endIndex = Math.min(
@@ -52,7 +35,24 @@ const Virtualizer = ({
       start: startIndex,
       end: endIndex,
     });
-  };
+  }, [list, elHeigt, threshold]);
+
+  useEffect(
+    function () {
+      const timeout = setTimeout(function () {
+        const childElement = parentContainerRef.current?.children[0];
+        const elHeight = childElement?.offsetHeight + 2 * gap;
+        setElHeight(elHeight);
+        parentContainerRef.current?.setAttribute(
+          "style",
+          `height:${elHeight * list.length}px`
+        );
+        calcListToRender();
+        clearTimeout(timeout);
+      });
+    },
+    [gap, list, calcListToRender]
+  );
 
   return (
     <div

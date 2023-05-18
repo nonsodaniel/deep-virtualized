@@ -22,7 +22,7 @@ interface IPayload {
 
 const url = `https://front-end-task-dot-fpls-dev.uc.r.appspot.com/api/v1/public/task_templates`;
 
-export const getLists = () => {
+export const getLists = (isCached?: boolean) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch({ type: START_FETCH_LIST });
@@ -36,11 +36,13 @@ export const getLists = () => {
         const { status } = response;
 
         if (status === 200) {
-          payload.lists = response.data;
-          localStorage.setItem(
-            "lists",
-            JSON.stringify(response.data.splice(0, 200))
-          );
+          payload.lists = response.data.splice(0, 1000);
+          if (isCached) {
+            localStorage.setItem(
+              "lists",
+              JSON.stringify(response.data.splice(0, 200))
+            );
+          }
           return dispatch({ type: SET_LIST_DATA, payload });
         } else {
           payload.errorMsg = "failed to fetch data";
