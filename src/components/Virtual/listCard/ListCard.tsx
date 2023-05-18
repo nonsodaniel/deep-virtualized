@@ -1,4 +1,5 @@
 import { IListData } from "../../../store/actions/types";
+import "./listcard.scss";
 
 interface IListCard {
   item: IListData;

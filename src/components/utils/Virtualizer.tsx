@@ -58,6 +58,7 @@ const Virtualizer = ({
       onWheel={calcListToRender}
     >
       {list?.slice(listToRender.start, listToRender.end).map((item, index) => {
+        console.log("key", keyEtractorFunction?.(item));
         return (
           <div
             className="virtualized-item"
@@ -66,7 +67,7 @@ const Virtualizer = ({
               "--top": `${(listToRender.start + index) * elHeigt}px`,
               // position: "relative",
             }}
-            key={index}
+            key={keyEtractorFunction?.(item)}
           >
             <Component {...item} />
             {console.log("list", { list, item })}
