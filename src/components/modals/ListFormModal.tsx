@@ -95,13 +95,11 @@ const ListFormModal = ({ list, isOpen, onClose }: IListFormModalProps) => {
         setCategory(list.category);
         setLink(list.link);
       } else {
-        console.log("reset");
         resetForm();
       }
     };
     setEditData(list);
   }, [list, dispatch]);
-  console.log("list", list);
   return (
     <div className="list-modal">
       <Modal
